@@ -1,0 +1,129 @@
+<!doctype html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Servo - Continuous</title>
+    <meta name="description" content="Servo - Continuous with pubnub and johnny five">
+    <meta name="author" content="elwebman Alex Olivet Fernandez">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            Servo - Continuous with Johnny Five Library and Pubnub
+        </header>
+        <article>
+            <div>
+                <div>BOARD SETUP</div>
+                <ul>
+                    <li>Servo model: RS-2</li>
+                    <li>Black wire to GND</li>
+                    <li>Red wire to 5V</li>
+                    <li>Yellow (or orange) to PWN Pin 10</li>
+                </ul>
+                <img src="images/servo.png" alt="servos">
+            </div>
+        </article>
+        <aside>
+            <ul>
+                <li>
+                    <div>
+                        <div>CONTROL PANEL</div>
+                        <button id="up" type="button" class="button">
+                            <button id="down" type="button" class="button button2">
+                                <button id="more" type="button" class="button button3">
+                                    <button id="home" type="button" class="button button4">
+                    </div>
+                </li>
+                <br> CONSOLE LOG
+                <li> <pre id="log"></pre></li>
+            </ul>
+        </aside>
+        <footer>
+            <p>
+                <img src="images/hi.gif">
+            </p>
+            <p>
+                <a href="http://www.elwebman.io">elwebman.io</a>
+            </p>
+        </footer>
+    </div>
+    <script src="http://cdn.pubnub.com/pubnub-3.7.15.min.js"></script>
+    <script>
+    //write console log to html
+    (function() {
+        var old = console.log;
+        var logger = document.getElementById('log');
+        console.log = function() {
+            for (var i = 0; i < arguments.length; i++) {
+                if (typeof arguments[i] == 'object') {
+                    logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(arguments[i], undefined, 2) : arguments[i]) + '<br />';
+                } else {
+                    logger.innerHTML += arguments[i] + '<br />';
+                }
+            }
+        }
+    })();
+
+    //initialized pubnub
+    var pubnub = PUBNUB.init({
+        publish_key: 'xxxxxxxxxxxxxxxxx',
+        subscribe_key: 'xxxxxxxxxxxxxxxxx'
+    });
+
+    //UI components
+    var up = document.getElementById('up');
+    var down = document.getElementById('down');
+    var more = document.getElementById('more');
+    var home = document.getElementById('home');
+
+    //event listeners
+    up.addEventListener('click', function() {
+        message = { "id": "up" };
+        pubnub.publish({
+            channel: 'servoControl',
+            message: message,
+            callback: function() {
+                console.log("Set the horn to 45degrees")
+            }
+        })
+    });
+
+    down.addEventListener('click', function() {
+        message = { "id": "down" };
+        pubnub.publish({
+            channel: 'servoControl',
+            message: message,
+            callback: function() {
+                console.log("Angle change takes 500ms to complete")
+            }
+        })
+    });
+
+    more.addEventListener('click', function() {
+        message = { "id": "more" };
+        pubnub.publish({
+            channel: 'servoControl',
+            message: message,
+            callback: function() {
+                console.log("Angle change takes 500ms to complete over 10 steps")
+            }
+        })
+    });
+    home.addEventListener('click', function() {
+        message = { "id": "home" };
+        pubnub.publish({
+            channel: 'servoControl',
+            message: message,
+            callback: function() {
+                console.log("Return to startAt value")
+            }
+        })
+    });
+    </script>
+</body>
+
+</html>

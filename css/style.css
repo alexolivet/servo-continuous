@@ -1,0 +1,139 @@
+        /*!
+ *  Font Awesome 4.2.0 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */
+        /* FONT PATH
+ * -------------------------- */
+
+        @font-face {
+            font-family: 'FontAwesome';
+            src: url('../fonts/fontawesome-webfont.eot?v=4.2.0');
+            src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.2.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff?v=4.2.0') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.2.0') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.2.0#fontawesomeregular') format('svg');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .fa {
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: 1.3em;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin-left: 10px;
+        }
+
+        * {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            padding: 1em 2em;
+            font-family: "Helvetica Neue", "Roboto Light", "Segoe UI Web Light", "Segoe UI Light", "Segoe UI Web Regular", "Segoe UI", Helvetica, Arial, sans-serif;
+            color: #fff;
+            background: olive;
+        }
+
+        header {
+            grid-area: header;
+            background-color: #fed330;
+            padding: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            line-height: 1;
+            text-align: center;
+        }
+
+
+        article {
+            grid-area: content;
+            background-color: #20bf6b;
+            padding: 20px;
+        }
+
+        article img {
+            width: 40%;
+            height: 40%;
+            position: relative;
+        }
+
+        aside {
+            grid-area: sidebar;
+            background-color: #45aaf2;
+        }
+
+        aside li {
+            list-style: none;
+        }
+
+
+        footer {
+            padding: 20px;
+            grid-area: footer;
+            background-color: #fd9644;
+        }
+
+        footer img {
+            width: 8%;
+            height: 8%;
+            margin-top: -5px;
+            top: 5px;
+            border-radius: 50px;
+            float: right;
+        }
+
+        .wrapper {
+            display: grid;
+            grid-gap: 20px;
+            grid-template-columns: 1.5fr 2.5fr;
+            grid-template-areas: "header  header" "sidebar content" "footer  footer";
+        }
+
+        .button {
+            background-color: #4CAF50;
+            /* Green */
+            border: solid black;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .button2 {
+            background-color: #008CBA;
+        }
+        /* Blue */
+
+        .button3 {
+            background-color: #f44336;
+        }
+        /* Red */
+
+        .button4 {
+            background-color: #e7e7e7;
+            color: black;
+        }
+        /* Gray */
+
+        .button5 {
+            background-color: #555555;
+        }
+        /* Black */
+
+        @media (max-width: 500px) {
+            .wrapper {
+                grid-template-columns: 4fr;
+                grid-template-areas: "header" "content" "sidebar" "footer";
+            }
+        }
